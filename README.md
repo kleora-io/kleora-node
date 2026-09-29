@@ -1,6 +1,6 @@
 # kleora-node
 
-The official Kleora SDK package `@kleora/node` (https://kleora.io).
+The official Kleora SDK package `@kleora-io/node` (https://kleora.io).
 
 This repository is being set up. `0.0.0` is an empty placeholder that reserves the package name; the first real release is `0.1.0`.
 

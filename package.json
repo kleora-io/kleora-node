@@ -1,5 +1,5 @@
 {
-  "name": "@kleora/node",
+  "name": "@kleora-io/node",
   "version": "0.0.0",
   "description": "Reserved for the official Kleora SDK (https://kleora.io). 0.0.0 is an empty placeholder; the first release is 0.1.0.",
   "license": "Apache-2.0",
