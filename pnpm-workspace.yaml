@@ -1,0 +1,4 @@
+# A single package, not a workspace: this file only carries pnpm settings.
+# Build scripts are opt-in; tsup and vitest need esbuild's.
+allowBuilds:
+  esbuild: true

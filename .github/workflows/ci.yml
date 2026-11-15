@@ -1,0 +1,56 @@
+# Lint, typecheck, test and build, plus a drift check of the generated
+# management and account clients against the OpenAPI documents Kleora serves.
+# The contract tests in `test/contract/` skip here: they need a live
+# environment (README, "Contract tests").
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      # Regenerates `openapi/*.json` and `src/generated/*.ts` from
+      # https://api.kleora.io/api/v1/openapi.json and
+      # https://id.kleora.eu/account/v1/openapi.json. A diff means the deployed
+      # API moved: run `pnpm generate:client` and commit the result.
+      - name: Generated client matches the deployed document
+        run: |
+          pnpm generate:client
+          git diff --exit-code -- openapi src/generated

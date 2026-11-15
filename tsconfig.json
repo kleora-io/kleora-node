@@ -1,0 +1,26 @@
+{
+  // Standalone: nothing here delegates to another tsconfig, and `strict` is on
+  // so the type checker catches what review would miss. `src/generated/` is deliberately inside `include` — the
+  // acceptance of the generation pipeline is that its output compiles under the
+  // repository's pinned TypeScript, and a generated tree excluded from the
+  // typecheck would never prove that.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "*.config.ts"]
+}
